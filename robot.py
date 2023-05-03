@@ -2,6 +2,7 @@ import wpilib
 import os
 from wpilib import TimedRobot
 from robotcontainer import RobotContainer
+from autoroutine import AutoRoutine
 class MyRobot(TimedRobot):
     def robotInit(self):
         self.container = RobotContainer()
@@ -12,16 +13,19 @@ class MyRobot(TimedRobot):
         through every .02 seconds.'''
         pass
     def autonomousInit(self):
+        self.container.drivetrain.resetGyro()
+        self.container.drivetrain.reset()
         '''This is called once when the robot enters autonomous mode.'''
         self.auto = self.container.get_autonomous()
         pass
-    def autonomousPeriodic(self):
+    def autonomousPeriodic(self) -> AutoRoutine:
         self.auto.run() # this .run function is shared by both drivestraight and gyroTurn, so it is possible to do both
         '''This is called every cycle while the robot is in autonomous.'''
         pass
     def autonomousExit(self) -> None:
-        self.container.drivetrain.resetGyro()
-        self.container.drivetrain.reset()
+        #self.container.drivetrain.resetGyro()
+        #self.container.drivetrain.reset()
+        pass#gas
     def teleopInit(self):
         '''This is called once at the start of Teleop.'''
         pass
