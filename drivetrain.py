@@ -34,12 +34,12 @@ class Drivetrain:
         #convert to decimal precision
         return totalTravelled/2.0
 
-    def getGyroAngleZ(self):
+    def getGyroAngleY(self):
         """
         Give the twist of the robot
         :return: the current twist angle in degrees
         """
-        return self.gyro.getAngleZ()
+        return self.gyro.getAngleY()
 
     def resetGyro(self):
         self.gyro.reset()

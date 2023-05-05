@@ -12,3 +12,5 @@ class RobotConstants:
 
     distancePerTick = (math.pi * 0.07) / (12 * 120)
     intendedDistance = 2.0
+
+    maxTurnSpeed = 0.2
