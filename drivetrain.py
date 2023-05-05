@@ -36,10 +36,17 @@ class Drivetrain:
 
     def getGyroAngleY(self):
         """
-        Give the twist of the robot
+        Give the pitch of the robot
         :return: the current twist angle in degrees
         """
         return self.gyro.getAngleY()
+
+    def getGyroAngleZ(self):
+        """
+        Give the twist of the robot
+        :return: the current twist angle in degrees
+        """
+        return self.gyro.getAngleZ()
 
     def resetGyro(self):
         self.gyro.reset()
