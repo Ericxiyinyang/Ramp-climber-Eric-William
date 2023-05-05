@@ -2,19 +2,21 @@ from drivetrain import Drivetrain as DT
 from robotconstants import RobotConstants as RC
 from wpimath.controller import PIDController
 from autoroutine import AutoRoutine
+from superpid import AIOPID
 
 class climbup(AutoRoutine):
     def __init__(self, drivetrain: DT):
         self.drivetrain = drivetrain
         self.tolerance = 3
-        self.dir_pid_controller = PIDController(
-            20,
-            1/10,
-            0
+        self.dir_pid_controller = AIOPID(
+            prop=20,
+            integral=1/10,
+            derivative=0,
+            setPoint=0,
+            tol=0.01
         )
-        self.dir_pid_controller.setSetpoint(0)
-        self.dir_pid_controller.setTolerance(.01)
-        self.dir_pid_controller.setIntegratorRange(-.2, .2)
+
+        self.dir_pid_controller.setIntgRange(-.2, .2)
         self.onRamp = False
 
     def run(self):
