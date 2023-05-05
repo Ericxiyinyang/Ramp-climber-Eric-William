@@ -27,6 +27,7 @@ class climbup(AutoRoutine):
             tol=0.8
         )
         self.zeroZ = self.drivetrain.getGyroAngleZ()
+        self.acComp = 0
 
     def run(self):
         #define forward constant for now
@@ -42,8 +43,8 @@ class climbup(AutoRoutine):
 
 
         # general corrective PID steering
-        lTravel = self.drivetrain.getLEncoderDistance()
-        rTravel = self.drivetrain.getREncoderDistance()
+        lTravel = self.drivetrain.getLEncoderDistance() - self.acComp
+        rTravel = self.drivetrain.getREncoderDistance() - self.acComp
         # avgDistance = self.drivetrain.getAvgDistanceTravelled()
         diff = lTravel - rTravel
         pid_diff = self.dir_pid_controller.calculate(diff)
@@ -65,7 +66,7 @@ class climbup(AutoRoutine):
         if not self.accidental_pid_controller.atSetpoint():
             self.drivetrain.move(zdiff, forward)
             if zdiff > 0:
-                lTravel -= abs(zdiff)
+                self.acComp += abs(zdiff)
             else:
-                rTravel -= abs(zdiff)
+                self.acComp += abs(zdiff)
         print(f"{forward=}, {rotate=}, distance: {self.drivetrain.getAvgDistanceTravelled()}, difference: {diff}")
