@@ -11,7 +11,7 @@ class climbup(AutoRoutine):
         self.dir_pid_controller = AIOPID(
             prop=20,
             integral=1/10,
-            derivative=0,
+            derivative=1/2,
             setPoint=0,
             tol=0.01
         )
@@ -23,7 +23,7 @@ class climbup(AutoRoutine):
     def run(self):
         # ramp pitch stop condition
         pitch = self.drivetrain.getGyroAngleY()
-        if pitch > 5:
+        if pitch > 3:
             self.onRamp = True
         elif self.onRamp:
             self.drivetrain.move(0, 0)

@@ -32,7 +32,7 @@ class MyRobot(TimedRobot):
     def teleopPeriodic(self):
         forward = self.container.controller.getRawAxis(0)
         rotate = self.container.controller.getRawAxis(1)
-        self.container.drivetrain.move(-forward, rotate)
+        self.container.drivetrain.move(forward, -rotate)
         print(f"rotate:{rotate} forward:{forward}")
         '''This is called once every cycle during Teleop'''
 
