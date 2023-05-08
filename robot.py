@@ -16,6 +16,7 @@ class MyRobot(TimedRobot):
         self.container.drivetrain.zeroEncoders()
         '''This is called once when the robot enters autonomous mode.'''
         self.auto = self.container.get_autonomous()
+        self.auto.reset()
 
     def autonomousPeriodic(self) -> AutoRoutine:
         self.auto.run() # this .run function is shared by both drivestraight and gyroTurn, so it is possible to do both
