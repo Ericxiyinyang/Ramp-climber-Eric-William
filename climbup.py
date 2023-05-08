@@ -11,14 +11,13 @@ class climbup(AutoRoutine):
         self.dir_pid_controller = AIOPID(
             prop=20,
             integral=1/10,
-            derivative=0,
+            derivative=1/2,
             setPoint=0,
             tol=0.01
         )
 
         self.dir_pid_controller.setIntgRange(-.2, .2)
         self.onRamp = False
-
         self.accidental_pid_controller = AIOPID(
             prop=20,
             integral=1/10,
@@ -28,8 +27,10 @@ class climbup(AutoRoutine):
         )
         self.zeroZ = self.drivetrain.getGyroAngleZ()
         self.acComp = 0
+        
     def reset(self):
         self.onRamp = False
+
 
     def run(self):
         #define forward constant for now
@@ -37,7 +38,7 @@ class climbup(AutoRoutine):
 
         # ramp pitch stop condition
         pitch = self.drivetrain.getGyroAngleY()
-        if pitch > 5:
+        if pitch > 3:
             self.onRamp = True
         elif self.onRamp:
             self.drivetrain.move(0, 0)
