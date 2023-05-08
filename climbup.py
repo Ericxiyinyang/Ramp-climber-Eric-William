@@ -28,6 +28,8 @@ class climbup(AutoRoutine):
         )
         self.zeroZ = self.drivetrain.getGyroAngleZ()
         self.acComp = 0
+    def reset(self):
+        self.onRamp = False
 
     def run(self):
         #define forward constant for now
