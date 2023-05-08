@@ -27,6 +27,7 @@ class climbup(AutoRoutine):
         )
         self.zeroZ = self.drivetrain.getGyroAngleZ()
         self.acComp = 0
+        self.drift = self.drivetrain.getGyroAngleZ()
         
     def reset(self):
         self.onRamp = False
@@ -37,7 +38,7 @@ class climbup(AutoRoutine):
         forward = 0.7
 
         # ramp pitch stop condition
-        pitch = self.drivetrain.getGyroAngleY()
+        pitch = self.drivetrain.getGyroAngleY() - self.drift
         if pitch > 4.8:
             self.onRamp = True
         elif self.onRamp:
