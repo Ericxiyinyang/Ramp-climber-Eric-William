@@ -19,14 +19,6 @@ class climbup(AutoRoutine):
         self.dir_pid_controller.setIntgRange(-.2, .2)
         self.onRamp = False
 
-        self.accidental_pid_controller = AIOPID(
-            prop=20,
-            integral=1/10,
-            derivative=0,
-            setPoint=0,
-            tol=0.01
-        )
-        self.zeroZ = self.drivetrain.getGyroAngleZ()
 
     def run(self):
         # ramp pitch stop condition
@@ -36,8 +28,6 @@ class climbup(AutoRoutine):
         elif self.onRamp:
             self.drivetrain.move(0, 0)
             return
-
-        # accidental Z rotation control
 
 
         # general corrective PID steering
