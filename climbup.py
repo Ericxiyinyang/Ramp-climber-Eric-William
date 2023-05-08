@@ -38,7 +38,7 @@ class climbup(AutoRoutine):
 
         # ramp pitch stop condition
         pitch = self.drivetrain.getGyroAngleY()
-        if pitch > 3:
+        if pitch > 4.8:
             self.onRamp = True
         elif self.onRamp:
             self.drivetrain.move(0, 0)
